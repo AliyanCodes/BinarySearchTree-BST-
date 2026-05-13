@@ -1,0 +1,32 @@
+	void inorder(BNode<T>* curr)
+	{
+		if (curr==NULL)
+		{
+			return;
+		}
+		inorder(curr->left);
+		cout << curr->data<<" ";
+		inorder(curr->right);
+	}
+
+	void preorder(BNode<T>* curr)
+	{
+		if (curr == NULL)
+		{
+			return;
+		}
+		cout << curr->data << " ";
+		preorder(curr->left);
+		preorder(curr->right);
+	}
+	void postorder(BNode<T>* curr)
+	{
+		if (curr == NULL)
+		{
+			return;
+		}
+		
+		postorder(curr->left);
+		postorder(curr->right);
+		cout << curr->data << " ";
+	}
