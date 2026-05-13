@@ -1,0 +1,39 @@
+	void Rinsert(BNode<T>*& root, T value)
+	{
+
+
+		BNode<T>* temp = new BNode<T>(value);
+		if (root == NULL)
+		{
+			root = temp;
+		}
+		else
+		{
+			if (value < root->data)
+			{
+				if (root->left == NULL)
+				{
+					root->left = temp;
+				}
+				else
+				{
+					Rinsert(root->left, value);
+				}
+
+
+			}
+			else
+			{
+				if (root->right == NULL)
+				{
+					root->right = temp;
+				}
+				else
+				{
+					Rinsert(root->right, value);
+				}
+
+
+			}
+		}
+	}
