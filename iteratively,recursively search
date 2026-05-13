@@ -1,0 +1,43 @@
+bool search_iter(T val)
+{
+	BNode<T>* curr = root;
+
+	while (curr != NULL)
+	{
+		if (curr->data == val)
+		{
+			return true;
+		}
+		else if (val < curr->data)
+		{
+			curr = curr->left;
+		}
+		else
+		{
+			curr = curr->right;
+		}
+	}
+
+	return false;
+}
+bool search_rec(BNode<T>* curr, T val)
+{
+	if (curr == NULL)
+	{
+		return false;
+	}
+
+	if (curr->data == val)
+	{
+		return true;
+	}
+
+	if (val < curr->data)
+	{
+		return search_rec(curr->left, val);
+	}
+	else
+	{
+		return search_rec(curr->right, val);
+	}
+}
