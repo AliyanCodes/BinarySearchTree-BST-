@@ -1,0 +1,19 @@
+void BreadthFirst(BNode<T>* curr)
+{
+	Queue<BNode<T>*> q(100);
+	q.enqueue(curr);//same as q.enqueue
+	while (!q.isEmpty())
+	{
+		BNode<T>* temp = q.peekFront(); //same as q.getfront
+		q.dequeue();//same as q.dequeue
+		cout << temp->data << " ";
+		if (temp->left!=NULL)
+		{
+			q.enqueue(temp->left);
+		}
+		if (temp->right!=NULL)
+		{
+			q.enqueue(temp->right);
+		}
+	}
+}
