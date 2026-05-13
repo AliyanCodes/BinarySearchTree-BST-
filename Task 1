@@ -1,0 +1,21 @@
+template<class T>
+class BNode {
+public:
+	T data;
+	BNode* left, * right;
+	BNode(T d)
+	{
+		data = d;
+		left = right = nullptr;
+	}
+};
+//Task 2
+template<class T>
+class BST {
+	BNode<T>* root;
+public:
+	BST()
+	{
+		root = nullptr;
+	}
+};
