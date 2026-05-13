@@ -1,0 +1,448 @@
+#include<iostream>
+using namespace std;
+template <class T>
+class Stack
+{
+private:
+
+	int size;
+	int top;
+	T* arr;
+
+public:
+
+	Stack(int s)
+	{
+
+		size = s;
+		top = -1;
+		arr = new T[size];
+	}
+
+	bool isFull()
+	{
+
+		if (top == size - 1)
+			return true;
+
+		return false;
+
+	}
+
+	bool isEmpty()
+	{
+
+		if (top == -1)
+			return true;
+
+		return false;
+
+	}
+
+
+	void push(T value)
+	{
+
+		if (!isFull())
+			arr[++top] = value;
+
+		else
+			cout << "Sorry The Stack Is Full...." << endl;
+	}
+
+	T pop()
+	{
+
+		return arr[top--];
+
+	}
+
+	T returnTop()  // this will only return the top element without decrementing the top
+	{
+
+		return arr[top];
+
+	}
+
+};
+
+
+template <class T>
+class Queue {
+
+private:
+	int size, front, rear;
+	T* arr;
+
+public:
+	Queue(int s) : size(s), front(0), rear(-1)
+	{
+		arr = new T[s];
+	}
+	~Queue() { delete[] arr; }
+
+	bool isFull()  const {
+		return (rear + 1) % size == front && rear != -1;
+	}
+	bool isEmpty() const {
+		return rear == -1;
+	}
+
+	void enqueue(T val) {
+		if (!isFull()) {
+			rear = (rear + 1) % size;
+			arr[rear] = val;
+		}
+	}
+
+	T dequeue() {
+		T val = arr[front];
+		if (front == rear) {
+			front = 0; rear = -1;
+		} // queue becomes empty
+
+		else front = (front + 1) % size;
+		return val;
+	}
+
+	T peekFront() const {
+		return arr[front];
+	}
+	T peekRear()  const {
+		return arr[rear];
+	}
+};
+
+
+// Task 1
+template<class T>
+class BNode {
+public:
+	T data;
+	BNode* left, * right;
+	BNode(T d)
+	{
+		data = d;
+		left = right = nullptr;
+	}
+};
+//Task 2
+template<class T>
+class BST {
+	BNode<T>* root;
+public:
+	BST()
+	{
+		root = nullptr;
+	}
+	void insert(T value)//Task 3
+	{
+		BNode<T>* temp = new BNode<T>(value);
+		if (root == NULL)
+		{
+			root = temp;
+		}
+		else
+		{
+			BNode<T>* curr = root;
+			BNode<T>* Pcurr = NULL;
+			while (curr != NULL)
+			{
+				Pcurr = curr;
+				if (value > curr->data)
+				{
+					curr = curr->right;
+				}
+				else
+				{
+					curr = curr->left;
+				}
+			}
+			if (value < Pcurr->data)
+			{
+				Pcurr->left = temp;
+			}
+			else
+			{
+				Pcurr->right = temp;
+			}
+		}
+	}
+	void Rinsert(BNode<T>*& root, T value)
+	{
+
+
+		BNode<T>* temp = new BNode<T>(value);
+		if (root == NULL)
+		{
+			root = temp;
+		}
+		else
+		{
+			if (value < root->data)
+			{
+				if (root->left == NULL)
+				{
+					root->left = temp;
+				}
+				else
+				{
+					Rinsert(root->left, value);
+				}
+
+
+			}
+			else
+			{
+				if (root->right == NULL)
+				{
+					root->right = temp;
+				}
+				else
+				{
+					Rinsert(root->right, value);
+				}
+
+
+			}
+		}
+	}
+	void display(BNode<T>* root)
+	{
+		if (root == NULL)
+		{
+			return;
+		}
+		display(root->left);
+		cout << root->data << " ";
+		display(root->right);
+	}
+	BNode<T>* getRoot()
+	{
+		return root;
+	}
+	void inorder(BNode<T>* curr)
+	{
+		if (curr==NULL)
+		{
+			return;
+		}
+		inorder(curr->left);
+		cout << curr->data<<" ";
+		inorder(curr->right);
+	}
+
+	void preorder(BNode<T>* curr)
+	{
+		if (curr == NULL)
+		{
+			return;
+		}
+		cout << curr->data << " ";
+		preorder(curr->left);
+		preorder(curr->right);
+	}
+	void postorder(BNode<T>* curr)
+	{
+		if (curr == NULL)
+		{
+			return;
+		}
+		
+		postorder(curr->left);
+		postorder(curr->right);
+		cout << curr->data << " ";
+	}
+	void BreadthFirst(BNode<T>* curr)
+	{
+		Queue<BNode<T>*> q(100);
+		q.enqueue(curr);
+		while (!q.isEmpty())
+		{
+			BNode<T>* temp = q.peekFront(); 
+			q.dequeue();
+			cout << temp->data << " ";
+			if (temp->left!=NULL)
+			{
+				q.enqueue(temp->left);
+			}
+			if (temp->right!=NULL)
+			{
+				q.enqueue(temp->right);
+			}
+		}
+	}
+	void IterativePreorder(BNode<T>* curr)
+	{
+		if (curr==NULL)
+		{
+			return;
+		}
+		else
+		{
+			Stack<BNode<T>*> s(100);
+			s.push(curr);
+			while (!s.isEmpty())
+			{
+				if (curr!=NULL)
+				{
+					
+					curr = s.pop();
+					cout << curr->data << " ";
+					if (curr->right != NULL)
+					{
+						s.push(curr->right);
+					}
+
+					if (curr->left != NULL)
+					{
+						s.push(curr->left);
+					}
+					
+				}
+				
+			}
+		}
+	}
+	void IterativeInorder(BNode<T>* curr)
+	{
+		if (curr == NULL)
+		{
+			return;
+		}
+		else
+		{
+			Stack<BNode<T>*> s(100);
+			while (curr != NULL || !s.isEmpty())
+			{
+				if (curr != NULL)
+				{
+					s.push(curr);
+					curr = curr->left;
+				}
+				else
+				{
+					curr = s.pop();
+					cout << curr->data << " ";
+					curr = curr->right;
+				}
+			}
+		}
+	}
+	void IterativePostorder(BNode<T>* curr)
+	{
+		if (curr==NULL)
+		{
+			return;
+		}
+		else
+		{
+			Stack<BNode<T>*> s1(100);
+			Stack<BNode<T>*> s2(100);
+			s1.push(curr);
+			while (!s1.isEmpty())
+			{
+				curr = s1.pop();
+				s2.push(curr);
+				if (curr->left != NULL)
+				{
+					s1.push(curr->left);
+				}
+
+				if (curr->right != NULL)
+				{
+					s1.push(curr->right);
+				}
+			}
+			while (!s2.isEmpty())
+			{
+				curr = s2.pop();
+				cout << curr->data << " ";
+			}
+		}
+	}
+	bool search_iter(T val)
+	{
+		BNode<T>* curr = root;
+
+		while (curr != NULL)
+		{
+			if (curr->data == val)
+			{
+				return true;
+			}
+			else if (val < curr->data)
+			{
+				curr = curr->left;
+			}
+			else
+			{
+				curr = curr->right;
+			}
+		}
+
+		return false;
+	}
+	bool search_rec(BNode<T>* curr, T val)
+	{
+		if (curr == NULL)
+		{
+			return false;
+		}
+
+		if (curr->data == val)
+		{
+			return true;
+		}
+
+		if (val < curr->data)
+		{
+			return search_rec(curr->left, val);
+		}
+		else
+		{
+			return search_rec(curr->right, val);
+		}
+	}
+};
+
+int main()
+{
+	BST<int> B1, B2;
+	B1.insert(1);
+	B1.insert(10);
+	B1.insert(-11);
+	B1.insert(-45);
+	B1.insert(110);
+	B1.insert(71);
+	cout << "Orginal Tree:";
+	B1.display(B1.getRoot());
+	BNode<int>* temp = B2.getRoot();
+	B2.Rinsert(temp, 1);
+	B2.Rinsert(temp, 10);
+	B2.Rinsert(temp, -11);
+	B2.Rinsert(temp, -45);
+	B2.Rinsert(temp, 110);
+	B2.Rinsert(temp, 71);
+	//B2.display(temp);
+	cout << "\nInorder:";
+	B1.inorder(B1.getRoot());
+	cout << "\nPreorder:";
+	B1.preorder(B1.getRoot());
+	cout << "\nPostorder:";
+	B1.postorder(B1.getRoot());
+	cout << "\nBreadFirst:";
+	B1.BreadthFirst(B1.getRoot());
+	cout << "\nIterativeInorder:";
+	B1.IterativeInorder(B1.getRoot());
+	cout << "\nIterative Preorder:";
+	B1.IterativePreorder(B1.getRoot());
+	
+	cout << "\nIterative PostOrder:";
+	B1.IterativePostorder(B1.getRoot());
+	cout << "\nIterative Search:"<< B1.search_iter(-45);
+	
+	cout << "\nRecursive search:"<< B1.search_rec(B1.getRoot(), -45);;
+	
+	return 0;
+}
