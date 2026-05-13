@@ -1,0 +1,57 @@
+	void IterativePreorder(BNode<T>* curr)
+	{
+		if (curr==NULL)
+		{
+			return;
+		}
+		else
+		{
+			Stack<BNode<T>*> s(100);
+			s.push(curr);
+			while (!s.isEmpty())
+			{
+				if (curr!=NULL)
+				{
+					
+					curr = s.pop();
+					cout << curr->data << " ";
+					if (curr->right != NULL)
+					{
+						s.push(curr->right);
+					}
+
+					if (curr->left != NULL)
+					{
+						s.push(curr->left);
+					}
+					
+				}
+				
+			}
+		}
+	}
+	void IterativeInorder(BNode<T>* curr)
+	{
+		if (curr == NULL)
+		{
+			return;
+		}
+		else
+		{
+			Stack<BNode<T>*> s(100);
+			while (curr != NULL || !s.isEmpty())
+			{
+				if (curr != NULL)
+				{
+					s.push(curr);
+					curr = curr->left;
+				}
+				else
+				{
+					curr = s.pop();
+					cout << curr->data << " ";
+					curr = curr->right;
+				}
+			}
+		}
+	}
