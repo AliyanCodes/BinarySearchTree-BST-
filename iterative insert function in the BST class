@@ -1,0 +1,33 @@
+void insert(T value)//Task 3
+{
+	BNode<T>* temp = new BNode<T>(value);
+	if (root == NULL)
+	{
+		root = temp;
+	}
+	else
+	{
+		BNode<T>* curr = root;
+		BNode<T>* Pcurr = NULL;
+		while (curr != NULL)
+		{
+			Pcurr = curr;
+			if (value > curr->data)
+			{
+				curr = curr->right;
+			}
+			else
+			{
+				curr = curr->left;
+			}
+		}
+		if (value < Pcurr->data)
+		{
+			Pcurr->left = temp;
+		}
+		else
+		{
+			Pcurr->right = temp;
+		}
+	}
+}
