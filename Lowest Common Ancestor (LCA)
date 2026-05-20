@@ -1,0 +1,17 @@
+template <class T>
+BNode<T>* LCA(BNode<T>* curr, T val1, T val2)
+{
+	if (curr == NULL)
+		return NULL;
+
+	// Go left
+	if (val1 < curr->data && val2 < curr->data)
+		return LCA(curr->left, val1, val2);
+
+	// Go right
+	if (val1 > curr->data && val2 > curr->data)
+		return LCA(curr->right, val1, val2);
+
+	// Split occurs here
+	return curr;
+}
