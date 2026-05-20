@@ -1,0 +1,17 @@
+bool is_valid_BST(BNode<T>* curr, T min_val, T max_val)
+{
+	// curr's data must be strictly > min_val AND < max_val
+	if (curr == nullptr)
+	{
+		return 1;
+	}
+	else
+	{
+		if (curr->data>min_val||curr->data<max_val)
+		{
+			return 0;
+		}
+		return is_valid_BST(curr->left, min_val, curr->data) && is_valid_BST(curr->right, curr->data, max_val);
+	}
+	// Recurse left with updated max, right with updated min
+}
