@@ -1,0 +1,26 @@
+T find_min(BNode<T>* curr)
+{
+	// Keep going LEFT until no left child
+	if (curr==nullptr)
+	{
+		return NULL;
+	}
+	while (curr->left!=NULL)
+	{
+		curr = curr->left;
+	}
+	return curr->data;
+	// That node holds the minimum
+}
+T find_max(BNode<T>* curr)
+{
+	if (curr == nullptr)
+	{
+		return NULL;
+	}
+	while (curr->right != NULL)
+	{
+		curr = curr->right;
+	}
+	return curr->data;
+}
