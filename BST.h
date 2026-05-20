@@ -110,25 +110,6 @@ public:
 		postorder(curr->right);
 		cout << curr->data << " ";
 	}
-	void BreadthFirst(BNode<T>* curr)
-	{
-		Queue<BNode<T>*> q(100);
-		q.enqueue(curr);
-		while (!q.isEmpty())
-		{
-			BNode<T>* temp = q.peekFront();
-			q.dequeue();
-			cout << temp->data << " ";
-			if (temp->left != NULL)
-			{
-				q.enqueue(temp->left);
-			}
-			if (temp->right != NULL)
-			{
-				q.enqueue(temp->right);
-			}
-		}
-	}
 	
 
 	bool search(BNode<T>* curr, T val)
