@@ -1,0 +1,18 @@
+void mirror(BNode<T>* curr)
+{
+	// Base case: NULL node, return
+	if (curr == nullptr)
+	{
+		return;
+	}
+	else
+	{
+		BNode<T>* temp;
+		temp = curr->left;
+		curr->left = curr->right;
+		curr->right = temp;
+		mirror(curr->left);
+		mirror(curr->right);
+	}
+	
+}
