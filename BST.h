@@ -1,8 +1,6 @@
 #include<iostream>
 using namespace std;
 
-
-
 // Task 1
 template<class T>
 class BNode {
