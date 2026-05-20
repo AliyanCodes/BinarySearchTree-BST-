@@ -1,0 +1,12 @@
+int count_leaves(BNode<T>* curr)
+{
+	if (curr == NULL)
+	{
+		return 0;
+	}
+	if (curr->right==NULL&&curr->left==NULL)
+	{
+		return 1;
+	}
+	return  count_leaves(curr->left) + count_leaves(curr->right);
+}
